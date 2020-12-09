@@ -1,0 +1,37 @@
+{
+  "consumer": {
+    "name": "Consumer"
+  },
+  "provider": {
+    "name": "Weather API"
+  },
+  "interactions": [
+    {
+      "description": "A GET request to retrieve the forecast",
+      "providerState": "WeatherForecast api returns 1 forecast",
+      "request": {
+        "method": "get",
+        "path": "/WeatherForecast",
+        "headers": {
+          "Accept": "application/json"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "body": {
+          "summary": "Scorching",
+          "temperatureC": 12,
+          "temperatureF": 53
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "1.0.0"
+    }
+  }
+}
