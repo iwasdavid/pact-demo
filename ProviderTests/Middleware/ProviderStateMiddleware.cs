@@ -8,11 +8,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 using Newtonsoft.Json;
 
-namespace ProviderTests
+namespace ProviderTests.Middleware
 {
     public class ProviderStateMiddleware
     {
-        private const string ConsumerName = "Consumer";
+        private const string ConsumerName = "Weather API Consumer";
         private readonly RequestDelegate _next;
         private readonly IDictionary<string, Action> _providerStates;
 
@@ -22,7 +22,7 @@ namespace ProviderTests
             _providerStates = new Dictionary<string, Action>
             {
                 {
-                    "WeatherForecast api returns 1 forecast",
+                    "WeatherForecast api returns 2 forecast",
                     SetupDbState
                 }
             };
@@ -68,8 +68,7 @@ namespace ProviderTests
                 var providerState = JsonConvert.DeserializeObject<ProviderState>(jsonRequestBody);
 
                 //A null or empty provider state key must be handled
-                if (providerState != null && !string.IsNullOrEmpty(providerState.State) &&
-                    providerState.Consumer == ConsumerName)
+                if (providerState != null && !string.IsNullOrEmpty(providerState.State) && providerState.Consumer == ConsumerName)
                     _providerStates[providerState.State].Invoke();
             }
         }
