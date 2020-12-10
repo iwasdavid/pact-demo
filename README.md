@@ -2,6 +2,8 @@
 
 Very basic .NET solution showing the concepts involved in consumer driven contract testing with [Pact](https://pact.io/).
 
+> Warning. Hacked together code that shouldn't be used anywhere. Purely for demos.
+
 ### Projects in Solution
 
 #### Client App (Consumer)
