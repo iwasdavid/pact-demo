@@ -8,6 +8,7 @@ namespace ClientApp
     {
         private static async Task Main(string[] args)
         {
+            Console.WriteLine("How many forecasts would you like to retrieve?");
             var numberOfForecasts = int.Parse(Console.ReadLine() ?? "10");
             var api = new WeatherForecastApiClient();
             
