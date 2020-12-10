@@ -52,18 +52,8 @@ namespace ProviderTests.Middleware
 
             if (context.Request.Method.ToUpper() == HttpMethod.Post.ToString().ToUpper() && context.Request.Body != null)
             {
-                var jsonRequestBody = string.Empty;
-                using (var reader = new StreamReader(context.Request.Body, Encoding.UTF8))
-                {
-                    try
-                    {
-                        jsonRequestBody = await reader.ReadToEndAsync();
-                    }
-                    catch (Exception e)
-                    {
-                        var t = e;
-                    }
-                }
+                using var reader = new StreamReader(context.Request.Body, Encoding.UTF8);
+                var jsonRequestBody = await reader.ReadToEndAsync();
 
                 var providerState = JsonConvert.DeserializeObject<ProviderState>(jsonRequestBody);
 
