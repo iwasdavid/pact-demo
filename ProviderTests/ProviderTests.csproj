@@ -8,11 +8,6 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
-        <PackageReference Include="Microsoft.Owin.Hosting" Version="4.1.1" />
-        <PackageReference Include="Microsoft.Owin.Security" Version="4.1.1" />
-        <PackageReference Include="Microsoft.Owin.Security.OAuth" Version="4.1.1" />
-        <PackageReference Include="Owin" Version="1.0.0" />
-        <PackageReference Include="OwinHost" Version="4.1.1" />
         <PackageReference Include="PactNet" Version="2.6.1" />
         <PackageReference Include="PactNet.Windows" Version="2.6.1" />
         <PackageReference Include="xunit" Version="2.4.1" />
