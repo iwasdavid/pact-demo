@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ClientApp.Models
+﻿namespace ClientApp.Models
 {
     public class WeatherForecast
         {
