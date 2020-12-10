@@ -9,7 +9,7 @@ using Xunit.Abstractions;
 
 namespace ProviderTests
 {
-    public class WeatherApiTests : IDisposable
+    public sealed class WeatherApiTests : IDisposable
     {
         private readonly string _providerUri;
         private readonly string _pactServiceUri;
@@ -19,7 +19,7 @@ namespace ProviderTests
         public WeatherApiTests(ITestOutputHelper output)
         {
             _outputHelper = output;
-            _providerUri = "http://localhost:61048";
+            _providerUri = "http://localhost:61048"; // Weather API base address
             _pactServiceUri = "http://localhost:9009";
 
             _webHost = WebHost.CreateDefaultBuilder()
@@ -31,9 +31,11 @@ namespace ProviderTests
         }
 
         [Fact]
-        public void EnsureProviderApiHonoursPactWithConsumer()
+        public void EnsureWeatherApiHonoursPactWithWeatherApiConsumer()
         {
             // Arrange
+            var pacts = @"..\..\..\..\ClientTests\pacts\weather_api_consumer-weather_api_provider.json";
+
             var config = new PactVerifierConfig
             {
                 Outputters = new List<IOutput>
@@ -47,16 +49,16 @@ namespace ProviderTests
             // Act, Assert
             IPactVerifier pactVerifier = new PactVerifier(config);
             pactVerifier.ProviderState($"{_pactServiceUri}/provider-states")
-                .ServiceProvider("Weather API", _providerUri)
-                .HonoursPactWith("Consumer")
-                .PactUri(@"C:\Users\adavidl\RiderProjects\PactDemo\ClientTests\pacts\consumer-weather_api.json")
+                .ServiceProvider("Weather API Provider", _providerUri)
+                .HonoursPactWith("Weather API Consumer")
+                .PactUri(pacts)
                 .Verify();
         }
 
         #region IDisposable Support
         private bool _disposedValue = false; // To detect redundant calls
 
-        protected virtual void Dispose(bool disposing)
+        private void Dispose(bool disposing)
         {
             if (!_disposedValue)
             {

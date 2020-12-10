@@ -17,8 +17,8 @@ namespace ClientTests
             PactBuilder = new PactBuilder();
 
             PactBuilder
-                .ServiceConsumer("Consumer")
-                .HasPactWith("Weather API");
+                .ServiceConsumer("Weather API Consumer")
+                .HasPactWith("Weather API Provider");
 
             MockProviderService = PactBuilder.MockService(MockServerPort); //Configure the http mock server
         }

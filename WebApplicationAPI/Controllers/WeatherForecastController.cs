@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebApplicationAPI.Controllers
 {
@@ -11,22 +11,24 @@ namespace WebApplicationAPI.Controllers
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
-
-        private readonly ILogger<WeatherForecastController> _logger;
-
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        
+        [HttpGet("{count}")]
+        public WeatherForecast[] Get(int count)
         {
-            _logger = logger;
-        }
-
-        [HttpGet]
-        public WeatherForecast Get()
-        {
-            return new WeatherForecast
+            var forecasts = new List<WeatherForecast>();
+            
+            for (var i = 0; i < count; i++)
             {
-                TemperatureC = 12,
-                Summary = "Scorching"
-            };
+                var summariesIndex = i < 10 ? i : 0;
+                    
+                forecasts.Add(new WeatherForecast
+                {
+                    TemperatureC = i,
+                    Summary = Summaries[summariesIndex]
+                });
+            }
+
+            return forecasts.ToArray();
         }
     }
 }

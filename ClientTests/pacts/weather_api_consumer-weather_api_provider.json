@@ -1,17 +1,17 @@
 {
   "consumer": {
-    "name": "Consumer"
+    "name": "Weather API Consumer"
   },
   "provider": {
-    "name": "Weather API"
+    "name": "Weather API Provider"
   },
   "interactions": [
     {
       "description": "A GET request to retrieve the forecast",
-      "providerState": "WeatherForecast api returns 1 forecast",
+      "providerState": "WeatherForecast api returns 2 forecast",
       "request": {
         "method": "get",
-        "path": "/WeatherForecast",
+        "path": "/WeatherForecast/2",
         "headers": {
           "Accept": "application/json"
         }
@@ -21,11 +21,18 @@
         "headers": {
           "Content-Type": "application/json; charset=utf-8"
         },
-        "body": {
-          "summary": "Scorching",
-          "temperatureC": 12,
-          "temperatureF": 53
-        }
+        "body": [
+          {
+            "summary": "Freezing",
+            "temperatureC": 0,
+            "temperatureF": 32
+          },
+          {
+            "summary": "Bracing",
+            "temperatureC": 1,
+            "temperatureF": 33
+          }
+        ]
       }
     }
   ],

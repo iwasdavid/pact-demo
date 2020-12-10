@@ -16,27 +16,20 @@ namespace ClientApp
             _client = new HttpClient { BaseAddress = new Uri(baseUri ?? "https://localhost:44392") };
         }
         
-        public async Task<WeatherForecast> GetSomething()
+        public async Task<WeatherForecast[]> GetForecasts(int count)
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, "/WeatherForecast");
+            using var request = new HttpRequestMessage(HttpMethod.Get, $"/WeatherForecast/{count}");
             request.Headers.Add("Accept", "application/json");
 
-            var response = await _client.SendAsync(request);
-
+            using var response = await _client.SendAsync(request);
             var content = await response.Content.ReadAsStringAsync();
-            var status = response.StatusCode;
 
-            var reasonPhrase = response.ReasonPhrase;
-
-            request.Dispose();
-            response.Dispose();
-
-            if (status == HttpStatusCode.OK)
+            if (response.StatusCode == HttpStatusCode.OK)
                 return !string.IsNullOrEmpty(content)
-                    ? JsonConvert.DeserializeObject<WeatherForecast>(content)
+                    ? JsonConvert.DeserializeObject<WeatherForecast[]>(content)
                     : null;
 
-            throw new Exception(reasonPhrase);
+            throw new Exception(response.ReasonPhrase);
         }
     }
 }
