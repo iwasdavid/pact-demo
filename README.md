@@ -2,6 +2,10 @@
 
 Very basic .NET solution showing the concepts involved in consumer driven contract testing with [Pact](https://pact.io/).
 
+Warning. Hacked together code that shouldn't be used anywhere. Purely for demos.
+
+Prerequisite: .NET 5.0 SDK - https://dotnet.microsoft.com/download/dotnet/5.0
+
 ### Projects in Solution
 
 #### Client App (Consumer)
